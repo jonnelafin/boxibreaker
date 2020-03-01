@@ -19,6 +19,7 @@ y = 4
 x = 2
 future = a
 last = a
+k = []
 finals = [[2,1],[3,4],[3,7],[2,10]]
 path = []
 def burn(arr):
@@ -95,7 +96,7 @@ def niceP(arr):
 				p2 = ""
 				end = ""
 			z2 = p2 + "█" + end
-			print(z2, end="")
+			print(z2*2, end="")
 			yp = yp + 1
 		print("")
 		xp = xp + 1
@@ -156,13 +157,21 @@ def valid(c = ""):
 	return True
 finished = False
 def step(c = ""):
-	global b,a,p,m,f,arr,y,x, future, last, finished, path
+	global b,a,p,m,f,arr,y,x, future, last, finished, path, k
+	if c == "r":
+		init()
+		return
+	if c == "z":
+		save()
+	if c == "l":
+		load()
 	fx = x
 	fy = y
 	arr[fy][fx] = a
 #	burn()
 #	last = future
 	if(valid(c)):
+		k.append(c)
 		path.append([fx,fy])
 		fy, fx = getVel(c)
 		if future == m:
@@ -173,6 +182,21 @@ def step(c = ""):
 	y = fy
 	arr[fy][fx] = p
 	finished = complete()
+def save():
+	global k
+	with open("savegame.txt","w+") as f:
+		for i in k:
+			f.write(i + "\n")
+			#f.write(str(i).replace("[","").replace("]","") + "\n")
+def load():
+	path = []
+	init()
+	with open("savegame.txt", "r+") as f:
+		for i in f.readlines():
+			path.append(i.replace("\n",""))
+#			path.append([int(i.split(" ,")[0]), int(i.split(" ,")[1].replace("\n",""))])
+	for i in path:
+		step(i)
 def complete():
 	global arr, finals, co, b
 	co2 = 0
