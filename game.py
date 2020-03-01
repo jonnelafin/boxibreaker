@@ -1,3 +1,4 @@
+import copy
 class bcolors:
 	HEADER = '\033[95m'
 	OKBLUE = '\033[94m'
@@ -28,12 +29,12 @@ def burn(arr):
 def cls():
 	print("\033[H\033[J")
 def bake(arr):
-	import copy
 	out = []
 	for i in arr:
 		tmp = []
 		for z in i:
-			tmp.append(copy.copy(z))
+			tmp.append(z + "")
+			#tmp.append(copy.copy(z))
 		out.append(tmp)
 	return(out)
 def init():
@@ -182,4 +183,5 @@ def complete():
 	if co == len(finals):
 		return True
 	return False
-#main()
+if __name__ == "__main__":
+	main()

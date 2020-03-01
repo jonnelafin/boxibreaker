@@ -2,11 +2,11 @@ import game
 import random
 
 print("Solving")
-it = 3000
+it = 10000
 
 mov = ["w","a","s","d"]
 
-steps = 400
+steps = 800
 
 bs = 0
 bp = []
